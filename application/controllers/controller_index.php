@@ -12,40 +12,53 @@ class Controller_Index extends Controller
 
     public function action_index() 
     {
-        $login = strip_tags($_POST['login']);
-        $password = md5(strip_tags($_POST['password']));
-    
+        
         $data = $_POST;
         $err = [];
 
-
         if ( !empty($data) )
-        {  
-            // Логин и пароль не соответствует рег. выражению
-            if ( !$this->reggCheck($data['login']) or !$this->reggCheck($data['password']) ) 
+        {
+            if ( isset($data['submit']) and isset($data['login']) and isset($data['password']) ) 
             {
-                $err[] = "Логин и пароль может состоять только из букв английского алфавита и цифр";
-            } 
 
-            // Коллиство символов вне диапазона 3 - 30
-            if ( !$this->num_char($data['login']) or !$this->num_char($data['password']) ) 
-            {
-                $err[] = "Логин и пароль должен быть не меньше 3-х символов и не больше 30";
-            } 
+                // Логин и пароль не соответствует рег. выражению
+                if ( !$this->reggCheck($data['login']) or !$this->reggCheck($data['password']) ) 
+                {
+                    $err[] = "Логин и пароль может состоять только из букв английского алфавита и цифр";
+                } 
 
-            if ( count($err) == 0 )
-            {
-                $this->login($login, $password);
+                // Коллиство символов вне диапазона 3 - 30
+                if ( !$this->num_char($data['login']) or !$this->num_char($data['password']) ) 
+                {
+                    $err[] = "Логин и пароль должен быть не меньше 3-х символов и не больше 30";
+                } 
+
+                if ( count($err) == 0 )
+                {
+                    $login = strip_tags($data['login']);
+                    $password = md5(strip_tags($data['password']));
+
+                    $this->login($login, $password);
+
+                } else {
+                    $_SESSION['massage'] = array_shift($err);
+                    header('Location: /');
+                }
+
 
             } else {
+
                 $_SESSION['massage'] = array_shift($err);
                 header('Location: /');
+
             }
 
+  
+        } else {
 
-
-
-            
+            $_SESSION['massage'] = array_shift($err);
+                header('Location: /');
+                
         }
     } 
 
