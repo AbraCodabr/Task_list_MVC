@@ -14,7 +14,12 @@
         <label>Пароль</label>
         <input type="passwors" name="password" placeholder="Введите свой пароль">
         <button type="submit" name="submit">Войти/зарегистрироваться</button>
-
+        <?php
+            if ($_SESSION['massage']) {
+                echo '<p class="msg"> ' . $_SESSION['massage'] . '</p>';
+            }
+            unset($_SESSION['massage']);
+        ?>
     </form>
 </body>
 </html>
