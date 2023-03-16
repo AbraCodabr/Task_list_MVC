@@ -14,7 +14,6 @@
         <form action="/profile/loggout/">
             <button class="button_exit">Exit</button>
         </form>
-        
     </div>
 
     <div class="container">
@@ -35,8 +34,7 @@
             </form>
         </div>
         <?php include 'application/views/'.$content_view ?>
-        
-						
+        		
     </div>
 </body>
 </html>
