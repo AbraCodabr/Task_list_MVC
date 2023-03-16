@@ -1,5 +1,7 @@
 <?php
 
+
+
 // Контроллер авторизации
 class Controller_Index extends Controller 
 {

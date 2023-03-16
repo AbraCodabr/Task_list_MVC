@@ -1,6 +1,7 @@
 <?php
 
 
+
 class Controller_Main extends Controller
 {
 
@@ -9,3 +10,5 @@ class Controller_Main extends Controller
 		$this->view->generate('main_view.php', 'template_view.php');
 	}
 }
+
+
